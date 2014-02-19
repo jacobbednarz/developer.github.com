@@ -39,7 +39,9 @@ module GitHub
         :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
         :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
         :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
-        :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7'
+        :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7',
+        :kdaigle      => 'bc622cf1dc277323515fd4d7ed66ed24',
+        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -53,7 +55,7 @@ module GitHub
       end
 
       def gravatar_for(login)
-        %(<img height="16" width="16" src="%s" />) % gravatar_url_for(login)
+        %(<img height="16" width="16" src="%s" alt="gravatar_for_#{login}"/>) % gravatar_url_for(login)
       end
 
       def gravatar_url_for(login)
@@ -630,6 +632,26 @@ module GitHub
       "s3_url"         => "https://github.s3.amazonaws.com/"
     })
 
+    PAGES = {
+      "url" => "https://api.github.com/repos/github/developer.github.com/pages",
+      "status" => "built",
+      "cname" => "developer.github.com",
+      "custom_404" => false
+    }
+
+    PAGES_BUILD = {
+      "url" => "https://api.github.com/repos/github/developer.github.com/pages/builds/5472601",
+      "status" => "built",
+      "error" => {
+        "message" => nil
+      },
+      "pusher" => USER,
+      "commit" => "351391cdcb88ffae71ec3028c91f375a8036a26b",
+      "duration" => 2104,
+      "created_at" => "2014-02-10T19:00:49Z",
+      "updated_at" => "2014-02-10T19:00:51Z"
+    }
+
     ORG = {
       "login"      => "github",
       "id"         => 1,
@@ -706,6 +728,10 @@ module GitHub
       "created_at" => "2011-04-22T13:33:48Z",
       "updated_at" => "2011-04-22T13:33:48Z"
     }
+
+    FULL_ISSUE = ISSUE.merge({
+      "closed_by" => USER
+    })
 
     ISSUE_COMMENT = {
       "id"         => 1,
@@ -1536,7 +1562,7 @@ module GitHub
 
     DEPLOYMENT = {
       "id" => 1,
-      "sha" => "topic-branch",
+      "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "creator" => USER,
       "payload" => JSON.dump({:environment => 'production'}),
